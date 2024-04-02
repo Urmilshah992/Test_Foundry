@@ -10,4 +10,13 @@ contract testError is Test {
     function setUp() public {
         Error = new errorR();
     }
+
+    function testFail_throwError() public view {
+        Error.throwError();
+    }
+
+    function testexpectRevert_throwError() public {
+        vm.expectRevert("Not Aurthorised");
+        Error.throwError();
+    }
 }
