@@ -24,14 +24,17 @@ contract testTime is Test {
     }
 
     function testBid() public {
+        //vm.wrap -- Set block timestamp to future timestamp
         vm.warp(startAt + 1 days);
         Time.bid();
     }
 
     function testTimpestamp() public {
         uint t = block.timestamp;
+        //Increment Current Timestamp
         skip(100);
         assertEq(block.timestamp, t + 100);
+        //decrement the the current time stamp
         rewind(10);
         assertEq(block.timestamp, t + 100 - 10);
     }
@@ -39,6 +42,7 @@ contract testTime is Test {
     function testBlocknumber() public {
         uint b = block.number;
         console.log("current Block Number is ", b);
+        //vm.roll(blocknumber) -- set the block number
         vm.roll(1000);
         assertEq(block.number, 1000);
     }
